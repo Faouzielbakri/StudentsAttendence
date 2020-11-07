@@ -1,0 +1,69 @@
+<FlatButton@ButtonBehavior+Image>:
+    source:'x.png'
+
+<LoginWindow>:
+    id: main_win
+    orientation: "vertical"
+    spacing:150
+    spacex: self.size[0]/3 -20
+    
+    canvas.before:
+        Rectangle:
+            size: (self.size[0],self.size[1]/2.6)
+            pos: (self.pos[0],self.pos[1]/1.5)
+            source: 'wave(1).png'
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        Label:
+            text: "Test App"
+            font_size: 25
+            bold: True
+            size_hint_x: .9
+        FlatButton:
+            text: "x"
+            size_hint_x: .1
+            on_press :app.stop()
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: main_win.spacex, 1
+        #spacing: 20
+        BoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            size_hint_y: None
+            height: 80
+            TextInput:
+                id : usr_field
+                hint_text: "Username"
+                write_tab: False
+                multiline: False
+                focus:True
+                on_text_validate: pwd_field.focus=True
+            TextInput:
+                id :pwd_field
+                hint_text: "Password"
+                write_tab: False
+                multiline: False
+                password : True
+                on_text_validate: root.validate_user()
+        Label:
+            id: sp
+            size_hint_y: None
+            height: 40
+        Button:
+            text: "Log In"
+            size_hint_y: None
+            height: 40
+            background_color:(0,.5,1,1)
+            background_normal: ''
+            on_release :root.validate_user()
+        
+        Label:
+            id: sp2
+            text:''
+            bold:True
+            color:(1,0,0,1)
+        
